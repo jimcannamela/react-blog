@@ -1,7 +1,24 @@
-import BlogContent from "./BlogContent";
+// import BlogContent from "./BlogContent";
+import { useState } from "react";
 
 function BlogListItem({ blog }) {
 
+    function ReadMore({children}) {
+        const text = children;
+        const [isReadMore, setIsReadMore] = useState(true);
+    
+        function toggleReadMore() {
+            setIsReadMore(!isReadMore);
+        };
+        return (
+            <p className="text">
+              {isReadMore ? text.slice(0, 150) : text}
+              <span onClick={toggleReadMore} className="read-or-hide">
+                {isReadMore ? "...read more" : " show less"}
+              </span>
+            </p>
+          );
+    };
     // function selectVideo() {
     //   const action = {
     //     type: "SET_SELECTED_VIDEO",
@@ -17,8 +34,8 @@ function BlogListItem({ blog }) {
           {/* <img src={blog.img_url} className="blog-list-item-avatar" alt="avatar"></img> */}
           <h4 className="blog-list-item-title">{blog.title}</h4>
           <div className= "blog-list-item-content">
-            <BlogContent content={blog.content}/>
-        </div>
+            <ReadMore>{blog.content}</ReadMore>
+          </div>
           {/* <p className="blog-list-item-content">{blog.content}</p> */}
         </section>
       </div>

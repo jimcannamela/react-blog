@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-function BlogContent(content) {
+function BlogContent({content}) {
     const text = content;
     const [isReadMore, setIsReadMore] = useState(true);
 
