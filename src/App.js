@@ -3,49 +3,49 @@ import {useReducer, useEffect, useState} from 'react';
 import BlogList from './BlogList'
 
 const initialState = {
-  posts:[],
-  selectedPosts:null,
-}
+  blogs:[],
+  selectedBlog:null,
+};
 
 function reducer(state, action) {
   switch (action.type) {
     case "SET_POSTS":
-     return {...state, posts: action.payload};
+     return {...state, blogs: action.payload};
     
     default:
       return state;
   }
-}
+};
 
 function App() {
   const postsUrl = 'https://sf-collective-api.herokuapp.com/posts';
   // const commentsUrl = 'https://sf-collective-api.herokuapp.com/comments';
 
-  const [state, dispatch] =
+  const [state, blogDispatch] =
     useReducer(reducer, initialState);
   
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
-  async function fetchPosts() {
+  async function fetchBlogs() {
     const response = await fetch (postsUrl);
     return response.json();
-  }
+  };
+
   // async function fetchComments() {
   //   const response = await fetch (commentsUrl);
   //   return response.json();
   // }
 
   useEffect(() => {
-    fetchPosts()
-    .then((postsData) => {
-    //  console.log(postsData);
+    fetchBlogs()
+    .then((blogData) => {
 
       const action = {
       type: "SET_POSTS",
-      payload: postsData,
+      payload: blogData,
     }
-    dispatch (action)
+    blogDispatch (action)
     setIsLoading (false); })
     .catch((err) => {
       setIsLoading(false);
@@ -53,21 +53,22 @@ function App() {
     })
   }, []);
 
+  
   return (
     <div className="App">
       <header className="App-header">
         <h1>Bloggit</h1>
       </header>
-      <main>
+      <section className="content-container">
       { isLoading ? <div>Application Loading...</div> : null }
-        { hasError ? <h1>Error!  Failed to load video data!</h1> : null}
+        { hasError ? <h1>Error!  Failed to load posts data!</h1> : null}
         { !isLoading && !hasError ? 
           <>
-            <BlogList posts={state.posts} dispatch={dispatch} />
+            <BlogList blogs={state.blogs} blogDispatch={blogDispatch} />
           </>
           : null
         }
-      </main>
+      </section>
     </div>
   );
 }

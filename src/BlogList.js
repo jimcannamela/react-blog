@@ -1,10 +1,10 @@
 import BlogListItem from "./BlogListItem";
 
-function BlogList({posts, postDispatch}) {
+function BlogList({blogs, blogsDispatch}) {
     return (
         <div className= "blog-list">
            {
-            posts.map((postsData) => <BlogListItem posts={postsData} dispatch={postDispatch}/>)        
+            blogs.map((blogsData) => <BlogListItem blog={blogsData}/>)        
             } 
         </div>
     )
