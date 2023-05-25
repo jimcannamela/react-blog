@@ -51,7 +51,7 @@ function BlogListItem({ blog }) {
     <div className="blog-list-item" key={blog.id}>
       <section>
         <h3 className="blog-list-item-author">{blog.author}</h3>
-        {/* <img src={blog.img_url} className="blog-list-item-avatar" alt="avatar"></img> */}
+        <img src={blog.img_url} className="blog-list-item-avatar" alt="avatar"></img>
         <h4 className="blog-list-item-title">{blog.title}</h4>
         <div className= "blog-list-item-content">
           {isReadMore ? text.slice(0,150) : text} 
