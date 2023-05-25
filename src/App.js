@@ -4,7 +4,6 @@ import BlogList from './BlogList'
 
 const initialState = {
   blogs:[],
-  selectedBlog:null,
 };
 
 function reducer(state, action) {
@@ -21,14 +20,13 @@ function App() {
   const postsUrl = 'https://sf-collective-api.herokuapp.com/posts';
   // const commentsUrl = 'https://sf-collective-api.herokuapp.com/comments';
 
-  const [state, blogDispatch] =
-    useReducer(reducer, initialState);
+  const [state, blogDispatch] = useReducer(reducer, initialState);
   
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
   async function fetchBlogs() {
-    const response = await fetch (postsUrl);
+    const response = await fetch (postsUrl, {method: 'GET'});
     return response.json();
   };
 

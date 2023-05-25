@@ -40,3 +40,7 @@
 .blog-list-item-avatar {
   height: 10vh;
 }
+
+.read-or-hide {
+  font-size: smaller;
+}
